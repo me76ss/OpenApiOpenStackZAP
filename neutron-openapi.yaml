@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Neutron API (Networking)
+  version: "2.0"
+  description: "OpenAPI definition for Neutron Network Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:9696/v2.0
+    description: "Neutron Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /extensions:
+    get:
+      summary: "List API Extensions"
+      description: "Lists available Neutron API extensions."
+      responses:
+        '200':
+          description: "Success"
+
+  /networks:
+    get:
+      summary: "List Networks"
+      description: "Lists all accessible networks."
+      responses:
+        '200':
+          description: "Success"
+
+  /subnets:
+    get:
+      summary: "List Subnets"
+      description: "Lists all subnets."
+      responses:
+        '200':
+          description: "Success"
+
+  /subnetpools:
+    get:
+      summary: "List Subnet Pools"
+      responses:
+        '200':
+          description: "Success"
+
+  /ports:
+    get:
+      summary: "List Ports"
+      description: "Lists all virtual switch ports."
+      responses:
+        '200':
+          description: "Success"
+
+  /routers:
+    get:
+      summary: "List Routers"
+      description: "Lists all logical routers."
+      responses:
+        '200':
+          description: "Success"
+
+  /security-groups:
+    get:
+      summary: "List Security Groups"
+      responses:
+        '200':
+          description: "Success"
+
+  /security-group-rules:
+    get:
+      summary: "List Security Group Rules"
+      responses:
+        '200':
+          description: "Success"
+
+  /floatingips:
+    get:
+      summary: "List Floating IPs"
+      responses:
+        '200':
+          description: "Success"
+
+  /agents:
+    get:
+      summary: "List Network Agents"
+      description: "Lists all Neutron agents (DHCP, L3, OVS, etc.)."
+      responses:
+        '200':
+          description: "Success"
+
+  /network-ip-availabilities:
+    get:
+      summary: "List Network IP Availabilities"
+      responses:
+        '200':
+          description: "Success"
+
+  /quotas:
+    get:
+      summary: "List Quotas"
+      responses:
+        '200':
+          description: "Success"
+

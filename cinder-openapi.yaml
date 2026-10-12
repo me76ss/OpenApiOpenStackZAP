@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Cinder API (Block Storage v3)
+  version: "3.0"
+  description: "OpenAPI definition for Cinder Block Storage v3 - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:8776/v3/d50f9fa96c57412b9d7469b456924a2c
+    description: "Cinder Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /volumes:
+    get:
+      summary: "List Volumes"
+      description: "Lists summary information for all block storage volumes."
+      responses:
+        '200':
+          description: "Success"
+
+  /volumes/detail:
+    get:
+      summary: "List Volumes Detailed"
+      description: "Lists detailed information for all block storage volumes."
+      responses:
+        '200':
+          description: "Success"
+
+  /types:
+    get:
+      summary: "List Volume Types"
+      description: "Lists volume types and extra specs."
+      responses:
+        '200':
+          description: "Success"
+
+  /snapshots:
+    get:
+      summary: "List Snapshots"
+      description: "Lists summary information for all snapshots."
+      responses:
+        '200':
+          description: "Success"
+
+  /snapshots/detail:
+    get:
+      summary: "List Snapshots Detailed"
+      description: "Lists detailed information for all snapshots."
+      responses:
+        '200':
+          description: "Success"
+
+  /backups:
+    get:
+      summary: "List Backups"
+      description: "Lists summary information for volume backups."
+      responses:
+        '200':
+          description: "Success"
+
+  /backups/detail:
+    get:
+      summary: "List Backups Detailed"
+      description: "Lists detailed information for volume backups."
+      responses:
+        '200':
+          description: "Success"
+
+  /groups:
+    get:
+      summary: "List Volume Groups"
+      responses:
+        '200':
+          description: "Success"
+
+  /group_types:
+    get:
+      summary: "List Volume Group Types"
+      responses:
+        '200':
+          description: "Success"
+
+  /os-availability-zone:
+    get:
+      summary: "List Availability Zones"
+      responses:
+        '200':
+          description: "Success"
+
+  /os-services:
+    get:
+      summary: "List Cinder Services"
+      description: "Lists all Cinder storage services and status."
+      responses:
+        '200':
+          description: "Success"
+
+  /os-quota-sets/d50f9fa96c57412b9d7469b456924a2c:
+    get:
+      summary: "Show Quotas"
+      description: "Shows quotas for this project."
+      responses:
+        '200':
+          description: "Success"
+
+  /limits:
+    get:
+      summary: "Show Limits"
+      description: "Shows absolute and rate limits for the project."
+      responses:
+        '200':
+          description: "Success"
+

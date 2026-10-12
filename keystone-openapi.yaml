@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Keystone API
+  version: 3.14.0
+  description: "OpenAPI definition for Keystone Identity Service"
+servers:
+  - url: http://192.168.214.100:5000/v3
+    description: "RegionOne Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Use your Keystone Auth Token here"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /auth/tokens:
+    post:
+      summary: "Authenticate and get token"
+      description: "Request a token using user credentials (username/password)"
+      security: [] # This endpoint does not require X-Auth-Token
+      responses:
+        '201':
+          description: "Token created"
+    get:
+      summary: "Validate token"
+      parameters:
+        - name: X-Subject-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Token is valid"
+        '404':
+          description: "Token invalid or expired"
+
+  /users:
+    get:
+      summary: "List all users"
+      responses:
+        '200':
+          description: "List of users"
+
+  /projects:
+    get:
+      summary: "List all projects"
+      responses:
+        '200':
+          description: "List of projects"
+
+  /services:
+    get:
+      summary: "List all services"
+      responses:
+        '200':
+          description: "List of services"
+
+  /endpoints:
+    get:
+      summary: "List all endpoints"
+      responses:
+        '200':
+          description: "List of endpoints"
+
+  /domains:
+    get:
+      summary: "List domains"
+      responses:
+        '200':
+          description: "List of domains"
+

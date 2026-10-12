@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Skyline API
+  version: "1.0"
+  description: "Skyline Dashboard API Definition"
+servers:
+  - url: http://192.168.214.100:9998/api/v1
+    description: "Skyline Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /projects:
+    get:
+      summary: "List Projects"
+      responses:
+        '200':
+          description: "Success"
+  
+  /services:
+    get:
+      summary: "List OpenStack Services"
+      responses:
+        '200':
+          description: "Success"
+
+  /regions:
+    get:
+      summary: "List Regions"
+      responses:
+        '200':
+          description: "Success"
+
+  /users:
+    get:
+      summary: "List Users"
+      responses:
+        '200':
+          description: "Success"
+
+  /compute/servers:
+    get:
+      summary: "List Compute Servers"
+      parameters:
+        - name: region
+          in: query
+          required: false
+          schema:
+            type: string
+            default: RegionOne
+      responses:
+        '200':
+          description: "Success"
+

@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Keystone Identity v3 DAST surface
+  version: "1.0"
+  description: >-
+    Safe CI-oriented Identity v3 surface. Authentication correctness is additionally
+    tested by stages/stage1/zap/keystone-auth-checks.sh so real passwords are never
+    embedded in this OpenAPI artifact.
+servers:
+  - url: "@@KEYSTONE_BASE_URL@@"
+components:
+  securitySchemes:
+    OpenStackToken:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+  parameters:
+    userId:
+      name: user_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@USER_ID@@"}
+    projectId:
+      name: project_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@PROJECT_ID@@"}
+    domainId:
+      name: domain_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@DOMAIN_ID@@"}
+    groupId:
+      name: group_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@GROUP_ID@@"}
+    roleId:
+      name: role_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@ROLE_ID@@"}
+    serviceId:
+      name: service_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@SERVICE_ID@@"}
+    endpointId:
+      name: endpoint_id
+      in: path
+      required: true
+      schema: {type: string, default: "@@ENDPOINT_ID@@"}
+security:
+  - OpenStackToken: []
+paths:
+  /v3:
+    get:
+      security: []
+      responses:
+        default: {description: Identity version discovery}
+  /v3/auth/tokens:
+    post:
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              auth:
+                identity:
+                  methods: [password]
+                  password:
+                    user:
+                      name: __dast_invalid_user__
+                      domain: {name: Default}
+                      password: __dast_invalid_password__
+      responses:
+        default: {description: Authentication behavior}
+  /v3/auth/catalog:
+    get:
+      responses: {default: {description: Token service catalog}}
+  /v3/auth/projects:
+    get:
+      responses: {default: {description: Projects available to token}}
+  /v3/auth/domains:
+    get:
+      responses: {default: {description: Domains available to token}}
+  /v3/auth/system:
+    get:
+      responses: {default: {description: System scope information}}
+  /v3/users:
+    get:
+      responses: {default: {description: Users collection}}
+  /v3/users/{user_id}:
+    parameters: [{$ref: '#/components/parameters/userId'}]
+    get:
+      responses: {default: {description: User resource}}
+  /v3/users/{user_id}/projects:
+    parameters: [{$ref: '#/components/parameters/userId'}]
+    get:
+      responses: {default: {description: User projects}}
+  /v3/users/{user_id}/application_credentials:
+    parameters: [{$ref: '#/components/parameters/userId'}]
+    get:
+      responses: {default: {description: Application credentials metadata}}
+  /v3/groups:
+    get:
+      responses: {default: {description: Groups collection}}
+  /v3/groups/{group_id}:
+    parameters: [{$ref: '#/components/parameters/groupId'}]
+    get:
+      responses: {default: {description: Group resource}}
+  /v3/groups/{group_id}/users:
+    parameters: [{$ref: '#/components/parameters/groupId'}]
+    get:
+      responses: {default: {description: Group users}}
+  /v3/projects:
+    get:
+      parameters:
+        - name: name
+          in: query
+          schema: {type: string}
+        - name: tags
+          in: query
+          schema: {type: string}
+      responses: {default: {description: Projects collection}}
+  /v3/projects/{project_id}:
+    parameters: [{$ref: '#/components/parameters/projectId'}]
+    get:
+      responses: {default: {description: Project resource}}
+  /v3/domains:
+    get:
+      responses: {default: {description: Domains collection}}
+  /v3/domains/{domain_id}:
+    parameters: [{$ref: '#/components/parameters/domainId'}]
+    get:
+      responses: {default: {description: Domain resource}}
+  /v3/roles:
+    get:
+      responses: {default: {description: Roles collection}}
+  /v3/roles/{role_id}:
+    parameters: [{$ref: '#/components/parameters/roleId'}]
+    get:
+      responses: {default: {description: Role resource}}
+  /v3/role_assignments:
+    get:
+      parameters:
+        - name: effective
+          in: query
+          schema: {type: boolean}
+        - name: scope.project.id
+          in: query
+          schema: {type: string, default: "@@PROJECT_ID@@"}
+        - name: user.id
+          in: query
+          schema: {type: string, default: "@@USER_ID@@"}
+      responses: {default: {description: Role assignment collection}}
+  /v3/services:
+    get:
+      responses: {default: {description: Service catalog services}}
+  /v3/services/{service_id}:
+    parameters: [{$ref: '#/components/parameters/serviceId'}]
+    get:
+      responses: {default: {description: Service resource}}
+  /v3/endpoints:
+    get:
+      responses: {default: {description: Service endpoints}}
+  /v3/endpoints/{endpoint_id}:
+    parameters: [{$ref: '#/components/parameters/endpointId'}]
+    get:
+      responses: {default: {description: Endpoint resource}}
+  /v3/regions:
+    get:
+      responses: {default: {description: Regions}}
+  /v3/registered_limits:
+    get:
+      responses: {default: {description: Registered unified limits}}
+  /v3/limits:
+    get:
+      responses: {default: {description: Unified limits}}
+

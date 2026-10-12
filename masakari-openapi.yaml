@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Masakari API (Instance HA Service)
+  version: "1.0"
+  description: "OpenAPI definition for Masakari Instance HA Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:15868/v1
+    description: "Masakari Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+  parameters:
+    MasakariVersionHeader:
+      name: OpenStack-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        default: "ha 1.1"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /segments:
+    get:
+      summary: "List Failover Segments"
+      description: "Lists all failover segments."
+      parameters:
+        - $ref: '#/components/parameters/MasakariVersionHeader'
+      responses:
+        '200':
+          description: "Success"
+
+  /notifications:
+    get:
+      summary: "List Failure Notifications"
+      description: "Lists failure notifications reported by monitors."
+      parameters:
+        - $ref: '#/components/parameters/MasakariVersionHeader'
+      responses:
+        '200':
+          description: "Success"
+
+  /hosts:
+    get:
+      summary: "List Hosts in Segments"
+      description: "Lists all compute hosts under HA management."
+      parameters:
+        - $ref: '#/components/parameters/MasakariVersionHeader'
+      responses:
+        '200':
+          description: "Success"
+
+  /vms:
+    get:
+      summary: "List Auto-recovery VMs"
+      description: "Lists virtual machines tracked for auto-recovery."
+      parameters:
+        - $ref: '#/components/parameters/MasakariVersionHeader'
+      responses:
+        '200':
+          description: "Success"
+

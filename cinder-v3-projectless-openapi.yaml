@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Cinder API (Modern Projectless Routing)
+  version: "3.0"
+  description: "OpenAPI definition for Cinder v3 without project ID in base URL - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:8776/v3
+    description: "Cinder Modern Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /volumes:
+    get:
+      summary: "List Volumes"
+      description: "Lists summary of volumes using project extracted from token."
+      responses:
+        '200':
+          description: "Success"
+
+  /volumes/detail:
+    get:
+      summary: "List Volumes Detailed"
+      description: "Lists detailed volume information."
+      responses:
+        '200':
+          description: "Success"
+
+  /types:
+    get:
+      summary: "List Volume Types"
+      description: "Lists volume types and specs."
+      responses:
+        '200':
+          description: "Success"
+
+  /snapshots:
+    get:
+      summary: "List Snapshots"
+      responses:
+        '200':
+          description: "Success"
+
+  /snapshots/detail:
+    get:
+      summary: "List Snapshots Detailed"
+      responses:
+        '200':
+          description: "Success"
+
+  /backups:
+    get:
+      summary: "List Backups"
+      responses:
+        '200':
+          description: "Success"
+
+  /backups/detail:
+    get:
+      summary: "List Backups Detailed"
+      responses:
+        '200':
+          description: "Success"
+
+  /groups:
+    get:
+      summary: "List Volume Groups"
+      responses:
+        '200':
+          description: "Success"
+
+  /group_types:
+    get:
+      summary: "List Volume Group Types"
+      responses:
+        '200':
+          description: "Success"
+
+  /os-availability-zone:
+    get:
+      summary: "List Availability Zones"
+      responses:
+        '200':
+          description: "Success"
+
+  /os-services:
+    get:
+      summary: "List Cinder Services"
+      responses:
+        '200':
+          description: "Success"
+
+  /limits:
+    get:
+      summary: "Show Rate and Absolute Limits"
+      responses:
+        '200':
+          description: "Success"
+

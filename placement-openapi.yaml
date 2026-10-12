@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Placement API
+  version: "1.0"
+  description: "OpenAPI definition for Placement Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:8780
+    description: "Placement Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+  parameters:
+    PlacementVersionHeader:
+      name: OpenStack-API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        default: "placement 1.36"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /:
+    get:
+      summary: "Placement API Root / Versions"
+      security: []
+      responses:
+        '200':
+          description: "API version details"
+
+  /resource_providers:
+    get:
+      summary: "List Resource Providers"
+      parameters:
+        - $ref: '#/components/parameters/PlacementVersionHeader'
+      responses:
+        '200':
+          description: "List of resource providers"
+
+  /resource_classes:
+    get:
+      summary: "List Resource Classes"
+      parameters:
+        - $ref: '#/components/parameters/PlacementVersionHeader'
+      responses:
+        '200':
+          description: "List of standard and custom resource classes"
+
+  /traits:
+    get:
+      summary: "List Traits"
+      parameters:
+        - $ref: '#/components/parameters/PlacementVersionHeader'
+      responses:
+        '200':
+          description: "List of traits"
+
+  /usages:
+    get:
+      summary: "List Total Resource Usages"
+      parameters:
+        - $ref: '#/components/parameters/PlacementVersionHeader'
+      responses:
+        '200':
+          description: "Total resource usage across all providers"
+

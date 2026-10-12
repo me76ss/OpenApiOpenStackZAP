@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Heat-CFN API (CloudFormation)
+  version: "1.0"
+  description: "OpenAPI definition for Heat-CFN Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:8000/v1
+    description: "Heat-CFN Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /:
+    get:
+      summary: "Execute CFN Action"
+      description: "Perform read-only CloudFormation actions."
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [DescribeStacks, ListStacks, DescribeStackEvents, DescribeStackResources, ListStacks]
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            default: "2010-05-15"
+      responses:
+        '200':
+          description: "Success"
+

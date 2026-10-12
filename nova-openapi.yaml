@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Nova API (Compute)
+  version: "2.1"
+  description: "OpenAPI definition for Nova Compute Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:8774/v2.1/6999b59d085d40319307268c213dd0ac
+    description: "Nova Compute Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /servers:
+    get:
+      summary: "List Servers"
+      description: "Lists IDs, names, and links for all servers."
+      responses:
+        '200':
+          description: "Success"
+  /servers/detail:
+    get:
+      summary: "List Servers Detailed"
+      description: "Lists all details for all servers."
+      responses:
+        '200':
+          description: "Success"
+  /flavors:
+    get:
+      summary: "List Flavors"
+      responses:
+        '200':
+          description: "Success"
+  /flavors/detail:
+    get:
+      summary: "List Flavors Detailed"
+      responses:
+        '200':
+          description: "Success"
+  /os-keypairs:
+    get:
+      summary: "List Keypairs"
+      responses:
+        '200':
+          description: "Success"
+  /os-availability-zone:
+    get:
+      summary: "List Availability Zones"
+      responses:
+        '200':
+          description: "Success"
+  /os-services:
+    get:
+      summary: "List Nova Services"
+      responses:
+        '200':
+          description: "Success"
+  /os-hypervisors:
+    get:
+      summary: "List Hypervisors"
+      responses:
+        '200':
+          description: "Success"
+  /os-quota-sets/6999b59d085d40319307268c213dd0ac:
+    get:
+      summary: "Show Quotas"
+      responses:
+        '200':
+          description: "Success"
+  /os-usage:
+    get:
+      summary: "List Simple Tenant Usage"
+      responses:
+        '200':
+          description: "Success"
+  /limits:
+    get:
+      summary: "Show Rate and Absolute Limits"
+      responses:
+        '200':
+          description: "Success"
+

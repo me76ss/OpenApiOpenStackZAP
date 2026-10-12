@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Keystone API
+  version: "3.14"
+  description: Specification for OpenStack Identity (Keystone) endpoints
+servers:
+  - url: http://192.168.214.100:5000/v3
+    description: Public Keystone Endpoint
+paths:
+  /auth/tokens:
+    get:
+      summary: Validate and show token details
+      description: Check current token information
+      parameters:
+        - name: X-Auth-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Subject-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Token details
+        '401':
+          description: Unauthorized
+    post:
+      summary: Password authentication with unscoped/scoped authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                auth:
+                  type: object
+      responses:
+        '201':
+          description: Created
+  /users:
+    get:
+      summary: List users
+      parameters:
+        - name: X-Auth-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of users
+  /projects:
+    get:
+      summary: List projects
+      parameters:
+        - name: X-Auth-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of projects
+  /services:
+    get:
+      summary: List services
+      parameters:
+        - name: X-Auth-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of services
+  /endpoints:
+    get:
+      summary: List service endpoints
+      parameters:
+        - name:

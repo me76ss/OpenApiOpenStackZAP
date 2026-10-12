@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Heat API (Orchestration Service)
+  version: "1.0"
+  description: "OpenAPI definition for Heat Orchestration Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:8004/v1/d50f9fa96c57412b9d7469b456924a2c
+    description: "Heat Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /stacks:
+    get:
+      summary: "List Stacks"
+      description: "Lists all orchestration stacks for the project."
+      responses:
+        '200':
+          description: "Success"
+
+  /resource_types:
+    get:
+      summary: "List Resource Types"
+      description: "Lists supported template resource types."
+      responses:
+        '200':
+          description: "Success"
+
+  /software_configs:
+    get:
+      summary: "List Software Configurations"
+      description: "Lists software deployment configurations."
+      responses:
+        '200':
+          description: "Success"
+
+  /software_deployments:
+    get:
+      summary: "List Software Deployments"
+      description: "Lists software deployments across servers."
+      responses:
+        '200':
+          description: "Success"
+
+  /services:
+    get:
+      summary: "List Heat Engine Services"
+      description: "Lists all running heat-engine engine instances."
+      responses:
+        '200':
+          description: "Success"
+
+  /build_info:
+    get:
+      summary: "Show Build Information"
+      description: "Shows revision/build info of the Heat orchestration engine."
+      responses:
+        '200':
+          description: "Success"
+

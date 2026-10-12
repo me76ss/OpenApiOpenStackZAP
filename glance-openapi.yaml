@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: OpenStack Glance API (Image Service)
+  version: "2.0"
+  description: "OpenAPI definition for Glance Image Service - Safe DAST Surface"
+servers:
+  - url: http://192.168.214.100:9292/v2
+    description: "Glance Public Endpoint"
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Auth-Token
+      description: "Keystone Auth Token"
+
+security:
+  - tokenAuth: []
+
+paths:
+  /images:
+    get:
+      summary: "List Images"
+      description: "Lists available OS images and snapshots."
+      responses:
+        '200':
+          description: "Success"
+
+  /tasks:
+    get:
+      summary: "List Tasks"
+      description: "Lists asynchronous tasks such as image imports."
+      responses:
+        '200':
+          description: "Success"
+
+  /schemas/images:
+    get:
+      summary: "Get Images List Schema"
+      responses:
+        '200':
+          description: "Success"
+
+  /schemas/image:
+    get:
+      summary: "Get Image Schema"
+      responses:
+        '200':
+          description: "Success"
+
+  /schemas/members:
+    get:
+      summary: "Get Image Members Schema"
+      responses:
+        '200':
+          description: "Success"
+
+  /schemas/member:
+    get:
+      summary: "Get Image Member Schema"
+      responses:
+        '200':
+          description: "Success"
+
+  /schemas/tasks:
+    get:
+      summary: "Get Tasks Schema"
+      responses:
+        '200':
+          description: "Success"
+
+  /schemas/task:
+    get:
+      summary: "Get Task Schema"
+      responses:
+        '200':
+          description: "Success"
+
+  /metadefs/namespaces:
+    get:
+      summary: "List Metadata Definition Namespaces"
+      responses:
+        '200':
+          description: "Success"
+
+  /metadefs/resource_types:
+    get:
+      summary: "List Metadata Resource Types"
+      responses:
+        '200':
+          description: "Success"
+
+  /info/import:
+    get:
+      summary: "Show Import Capabilities Info"
+      responses:
+        '200':
+          description: "Success"
+
+  /info/stores:
+    get:
+      summary: "Show Storage Backends Info"
+      responses:
+        '200':
+          description: "Success"
+
